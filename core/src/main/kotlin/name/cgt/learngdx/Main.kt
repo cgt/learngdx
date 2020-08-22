@@ -60,4 +60,9 @@ class Main : ApplicationAdapter() {
             }
         }
     }
+
+    override fun dispose() {
+        bucketImage.dispose()
+        batch.dispose()
+    }
 }
