@@ -68,7 +68,7 @@ class Ball(
     private var direction: Direction = Direction.LEFT
 
     fun move() {
-        box.x += 1
+        box.x -= 1
     }
 
     fun render() {
