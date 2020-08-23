@@ -51,7 +51,7 @@ class Main : ApplicationAdapter() {
 class Paddle(private val shape: ShapeRenderer, private val camera: Camera) {
     var x: Float = 0.0f
     var y: Float = 0.0f
-    var direction: Int = 1
+    private var direction: Int = 1
 
     fun move() {
         if (y + 1 > height - 40) {
