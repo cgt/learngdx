@@ -9,13 +9,13 @@ import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType
 
+private const val width = 640f
+private const val height = 480f
+
 class Main : ApplicationAdapter() {
 
     private lateinit var camera: OrthographicCamera
     private lateinit var shape: ShapeRenderer
-
-    private val width = 640f
-    private val height = 480f
 
     override fun create() {
         camera = OrthographicCamera()
