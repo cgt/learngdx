@@ -43,11 +43,6 @@ class Main : ApplicationAdapter() {
             draw(bucketImage, bucket.x, bucket.y)
             end()
         }
-        if (Gdx.input.isTouched) {
-            camera.translate(1f, 0f)
-        } else {
-            camera.translate(-1f, 0f)
-        }
     }
 
     override fun dispose() {
