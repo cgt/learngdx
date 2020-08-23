@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.math.Rectangle
-import com.badlogic.gdx.math.Vector3
 
 class Main : ApplicationAdapter() {
 
@@ -45,19 +44,9 @@ class Main : ApplicationAdapter() {
             end()
         }
         if (Gdx.input.isTouched) {
-            val touchPosition = Vector3()
-            touchPosition.set(Gdx.input.x.toFloat(), Gdx.input.y.toFloat(), 0f)
-            camera.unproject(touchPosition)
-            if (touchPosition.x.toInt() > bucket.x + 40) {
-                bucket.x++
-            } else if (touchPosition.x.toInt() < bucket.x + 40) {
-                bucket.x--
-            }
-            if (touchPosition.y.toInt() > bucket.y + 40) {
-                bucket.y++
-            } else if (touchPosition.y.toInt() < bucket.y + 40) {
-                bucket.y--
-            }
+            camera.translate(1f, 0f)
+        } else {
+            camera.translate(-1f, 0f)
         }
     }
 
