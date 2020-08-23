@@ -91,7 +91,7 @@ class Paddle(
         width = 10f
         height = 40f
     }
-    private var direction: Direction = Direction.UP
+    private var direction: Direction = Direction.DOWN
 
     fun patrol() {
         if (direction == Direction.UP) {
