@@ -42,16 +42,20 @@ class Main : ApplicationAdapter() {
         }
 
         paddle2.let { p2 ->
-            if (p2.y + 1 > height - 40) {
-                p2.direction = -1
-            } else if (p2.y - 1 < 0) {
-                p2.direction = 1
-            }
-            p2.y += 1 * p2.direction
+            move(p2)
         }
 
         paddle1.render()
         paddle2.render()
+    }
+
+    private fun move(p2: Paddle) {
+        if (p2.y + 1 > height - 40) {
+            p2.direction = -1
+        } else if (p2.y - 1 < 0) {
+            p2.direction = 1
+        }
+        p2.y += 1 * p2.direction
     }
 
 }
