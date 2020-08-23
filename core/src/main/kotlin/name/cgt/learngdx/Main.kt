@@ -41,9 +41,7 @@ class Main : ApplicationAdapter() {
             glClear(GL20.GL_COLOR_BUFFER_BIT)
         }
 
-        paddle2.let { p2 ->
-            p2.move()
-        }
+        paddle2.move()
 
         paddle1.render()
         paddle2.render()
