@@ -2,6 +2,7 @@ package name.cgt.learngdx
 
 import com.badlogic.gdx.ApplicationAdapter
 import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.Input
 import com.badlogic.gdx.graphics.Camera
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.GL20
@@ -34,6 +35,12 @@ class Main : ApplicationAdapter() {
         Gdx.gl.apply {
             glClearColor(0f, 0f, 0.2f, 1f)
             glClear(GL20.GL_COLOR_BUFFER_BIT)
+        }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+            paddle1.moveUp()
+        } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+            paddle1.moveDown()
         }
 
         paddle2.move()
@@ -70,5 +77,17 @@ class Paddle(
         shape.color = Color.WHITE
         shape.rect(box.x, box.y, box.width, box.height)
         shape.end()
+    }
+
+    fun moveUp() {
+        if (box.y + 1 < height - 40) {
+            box.y += 1
+        }
+    }
+
+    fun moveDown() {
+        if (box.y - 1 > 0) {
+            box.y -= 1
+        }
     }
 }
