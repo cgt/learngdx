@@ -47,6 +47,9 @@ class Main : ApplicationAdapter() {
 
         paddle2.patrol()
         ball.move()
+        if (ball.overlaps(paddle1)) {
+            ball.switchDirection()
+        }
 
         paddle1.render()
         paddle2.render()
@@ -68,7 +71,11 @@ class Ball(
     private var direction: Direction = Direction.LEFT
 
     fun move() {
-        box.x -= 1
+        if (direction == Direction.LEFT) {
+            box.x -= 1
+        } else {
+            box.x += 1
+        }
     }
 
     fun render() {
@@ -78,6 +85,16 @@ class Ball(
         shape.rect(box.x, box.y, box.width, box.height)
         shape.end()
     }
+
+    fun overlaps(paddle: Paddle): Boolean = box.overlaps(paddle.box)
+
+    fun switchDirection() {
+        direction =
+            if (direction == Direction.LEFT)
+                Direction.RIGHT
+            else
+                Direction.LEFT
+    }
 }
 
 class Paddle(
@@ -85,7 +102,7 @@ class Paddle(
     private val camera: Camera,
     startPosition: Pair<Float, Float> = Pair(0f, 0f)
 ) {
-    private val box = Rectangle().apply {
+    val box = Rectangle().apply {
         x = startPosition.first
         y = startPosition.second
         width = 10f
