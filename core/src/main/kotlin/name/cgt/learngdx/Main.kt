@@ -43,7 +43,7 @@ class Main : ApplicationAdapter() {
             paddle1.moveDown()
         }
 
-        paddle2.move()
+        paddle2.patrol()
         paddle1.render()
         paddle2.render()
     }
@@ -62,7 +62,7 @@ class Paddle(
     }
     private var direction: Int = 1
 
-    fun move() {
+    fun patrol() {
         if (box.y + 1 > height - 40) {
             direction = -1
         } else if (box.y - 1 < 0) {
