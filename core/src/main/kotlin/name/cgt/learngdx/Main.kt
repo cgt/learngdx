@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType
+import com.badlogic.gdx.math.Rectangle
 
 private const val width = 640f
 private const val height = 480f
@@ -22,14 +23,8 @@ class Main : ApplicationAdapter() {
         camera.setToOrtho(false, width, height)
         shape = ShapeRenderer()
 
-        paddle1 = Paddle(shape, camera).apply {
-            x = 0f
-            y = 0f
-        }
-        paddle2 = Paddle(shape, camera).apply {
-            x = 630f
-            y = 440f
-        }
+        paddle1 = Paddle(shape, camera)
+        paddle2 = Paddle(shape, camera, startPosition = Pair(width - 10, height - 40))
     }
 
     private lateinit var paddle1: Paddle
@@ -42,31 +37,38 @@ class Main : ApplicationAdapter() {
         }
 
         paddle2.move()
-
         paddle1.render()
         paddle2.render()
     }
 }
 
-class Paddle(private val shape: ShapeRenderer, private val camera: Camera) {
-    var x: Float = 0.0f
-    var y: Float = 0.0f
+class Paddle(
+    private val shape: ShapeRenderer,
+    private val camera: Camera,
+    startPosition: Pair<Float, Float> = Pair(0f, 0f)
+) {
+    private val box = Rectangle().apply {
+        x = startPosition.first
+        y = startPosition.second
+        width = 10f
+        height = 40f
+    }
     private var direction: Int = 1
 
     fun move() {
-        if (y + 1 > height - 40) {
+        if (box.y + 1 > height - 40) {
             direction = -1
-        } else if (y - 1 < 0) {
+        } else if (box.y - 1 < 0) {
             direction = 1
         }
-        y += 1 * direction
+        box.y += 1 * direction
     }
 
     fun render() {
         shape.projectionMatrix = camera.combined
         shape.begin(ShapeType.Filled)
         shape.color = Color.WHITE
-        shape.rect(x, y, 10f, 40f)
+        shape.rect(box.x, box.y, box.width, box.height)
         shape.end()
     }
 }
