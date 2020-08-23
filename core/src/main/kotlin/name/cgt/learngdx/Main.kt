@@ -42,7 +42,7 @@ class Main : ApplicationAdapter() {
         }
 
         paddle2.let { p2 ->
-            p2.move(p2)
+            p2.move()
         }
 
         paddle1.render()
@@ -55,13 +55,13 @@ class Paddle(private val shape: ShapeRenderer, private val camera: Camera) {
     var y: Float = 0.0f
     var direction: Int = 1
 
-    fun move(p2: Paddle) {
-        if (p2.y + 1 > height - 40) {
-            p2.direction = -1
-        } else if (p2.y - 1 < 0) {
-            p2.direction = 1
+    fun move() {
+        if (y + 1 > height - 40) {
+            direction = -1
+        } else if (y - 1 < 0) {
+            direction = 1
         }
-        p2.y += 1 * p2.direction
+        y += 1 * direction
     }
 
     fun render() {
