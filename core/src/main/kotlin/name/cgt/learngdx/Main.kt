@@ -60,15 +60,19 @@ class Paddle(
         width = 10f
         height = 40f
     }
-    private var direction: Int = 1
+    private var direction: Direction = Direction.UP
 
     fun patrol() {
         if (box.y + 1 > height - 40) {
-            direction = -1
+            direction = Direction.DOWN
         } else if (box.y - 1 < 0) {
-            direction = 1
+            direction = Direction.UP
         }
-        box.y += 1 * direction
+        if (direction == Direction.UP) {
+            moveUp(false)
+        } else if (direction == Direction.DOWN) {
+            moveDown(false)
+        }
     }
 
     fun render() {
@@ -96,4 +100,9 @@ class Paddle(
             }
         }
     }
+}
+
+enum class Direction {
+    UP,
+    DOWN
 }
