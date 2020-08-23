@@ -38,9 +38,9 @@ class Main : ApplicationAdapter() {
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            paddle1.moveUp()
+            paddle1.moveUp(sprint = Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT))
         } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            paddle1.moveDown()
+            paddle1.moveDown(sprint = Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT))
         }
 
         paddle2.patrol()
@@ -79,15 +79,21 @@ class Paddle(
         shape.end()
     }
 
-    fun moveUp() {
+    fun moveUp(sprint: Boolean) {
         if (box.y + 1 < height - 40) {
             box.y += 1
+            if (sprint) {
+                moveUp(sprint = false)
+            }
         }
     }
 
-    fun moveDown() {
+    fun moveDown(sprint: Boolean) {
         if (box.y - 1 > 0) {
             box.y -= 1
+            if (sprint) {
+                moveDown(sprint = false)
+            }
         }
     }
 }
